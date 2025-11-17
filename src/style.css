@@ -1,3 +1,14 @@
+:root {
+    --carousel-size: 90%;
+    --carousel-radius: 1rem;
+    --btn-bg: hsla(0, 0%, 0%, 0.4);
+    --btn-bg-hover: hsla(0, 0%, 0%, 0.6);
+    --btn-color: #fff;
+    --btn-pad: 1rem;
+    --btn-radius: 1rem;
+    --transition-speed: 0.3s;
+}
+
 *,
 *::before,
 *::after {
@@ -7,6 +18,7 @@
     color-scheme: dark;
     font-family: system-ui;
 }
+
 body {
     height: 100vh;
     width: 100vw;
@@ -14,64 +26,73 @@ body {
     justify-content: center;
     align-items: center;
 }
-.current {
-    height: 700px;
-    aspect-ratio: 1/1;
+
+.container {
+    height: var(--carousel-size);
+    aspect-ratio: 1 / 1;
 }
+
 .carousel {
     height: 100%;
     width: 100%;
     position: relative;
 }
+
 .carousel > ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
+
 .slide {
     position: absolute;
     inset: 0;
     opacity: 0;
+    transition: var(--transition-speed) opacity ease-in-out;
+    transition-delay: var(--transition-speed);
 }
+
+.slide[data-active] {
+    opacity: 1;
+    z-index: 1;
+    transition-delay: 0s;
+}
+
 .slide > img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem;
-}
-.slide[data-active] {
-    opacity: 1;
+    border-radius: var(--carousel-radius);
 }
 
 .carousel-button {
     position: absolute;
     z-index: 2;
-    background: none;
+    background: var(--btn-bg);
     border: none;
     font-size: 2rem;
     top: 95%;
     transform: translateY(-95%);
-    color: rgb(255, 255, 255);
-    background-color: hsla(0, 0%, 100%, 0.4);
-    border-radius: 1rem;
-    padding: 1rem;
+    color: var(--btn-color);
+    border-radius: var(--btn-radius);
+    padding: var(--btn-pad);
     cursor: pointer;
+    transition: 0.3ms scale ease;
 }
 
 .carousel-button:hover,
 .carousel-button:focus {
-    background-color: hsla(0, 0%, 100%, 0.6);
+    background: var(--btn-bg-hover);
     scale: 1.02;
 }
 
 .carousel-button:focus {
-    outline: 1px solid Canvas;
+    outline: 1px solid var(--btn-bg-hover);
 }
 
 .carousel-button.previous {
     left: 2rem;
 }
+
 .carousel-button.next {
     right: 2rem;
 }
